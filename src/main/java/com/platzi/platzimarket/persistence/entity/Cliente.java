@@ -14,7 +14,7 @@ public class Cliente {
     private String apellidos;
     private Integer celular;
     private String direccion;
-    
+
     @Column(name = "correo_electronico")
     private String correoElectronico;
 
