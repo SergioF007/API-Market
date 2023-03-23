@@ -30,6 +30,11 @@ public class Compra {
     @JoinColumn(name = "id", insertable = false, updatable = false)
     private Cliente cliente;
 
+    @OneToMany(mappedBy = "producto")
+    private List<ComprasProducto> Productos;
+
+
+
     public Integer getIdCompra() {
         return idCompra;
     }

@@ -1,6 +1,7 @@
 package com.platzi.platzimarket.persistence.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "productos")
@@ -31,6 +32,11 @@ public class Producto {
     @ManyToOne
     @JoinColumn(name = "id_categoria", insertable = false, updatable = false )
     private Categoria categoria;
+
+    /*  // no me interesaria mucho saber esta relacion, ose: tener todas la comparas relacinada a un producto.
+    @OneToMany(mappedBy = "compra")
+    private List<ComprasProducto> comprasProductos;
+    */
 
 
     public Integer getIdProducto() {
