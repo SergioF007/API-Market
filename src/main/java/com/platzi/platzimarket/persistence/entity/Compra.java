@@ -27,7 +27,7 @@ public class Compra {
     private String estado;
 
     @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id", insertable = false, updatable = false) // añadimos esta configuraciones para que no permita crear clientes desde esta realcion.
     private Cliente cliente;
 
     @OneToMany(mappedBy = "producto")

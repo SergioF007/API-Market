@@ -19,7 +19,7 @@ public class Cliente {
     @Column(name = "correo_electronico")
     private String correoElectronico;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente") // Ponemos el nombre del atributo con el que lo creamos en compras, en este caso: cliente.
     private List<Compra> compras;
 
     public String getId() {

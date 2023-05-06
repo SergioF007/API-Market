@@ -8,7 +8,10 @@ import javax.persistence.*;
 @Table(name = "compras_productos")
 public class ComprasProducto {
 
-    @EmbeddedId
+    // no colocamos id_compra y id_producto porque los colocamos en la clase
+    // ComprasPRoductoPK que contiene esta dos llaves primarias.
+
+    @EmbeddedId // se utiliza cuado la llave primaria es compuesta y esta dada por otra clase
     private ComprasProductoPK id;
 
     private Integer cantidad;

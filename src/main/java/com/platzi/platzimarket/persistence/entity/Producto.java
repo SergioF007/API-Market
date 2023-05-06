@@ -8,8 +8,8 @@ import java.util.List;
 public class Producto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_producto")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // agregamos esta notacion por que este valor se genera automaticamente gracias a la secuencia
+    @Column(name = "id_producto")  // relacion a l nombre en BD
     private Integer idProducto;
 
     // como la el atributo se nombra igual que como esta en BD no necestiamos referenciarlo con el @Column
@@ -33,7 +33,7 @@ public class Producto {
     @JoinColumn(name = "id_categoria", insertable = false, updatable = false )
     private Categoria categoria;
 
-    /*  // no me interesaria mucho saber esta relacion, ose: tener todas la comparas relacinada a un producto.
+    /*  // no me interesaria mucho saber esta relacion, ose: tener todas la compras relacinadas a un producto.
     @OneToMany(mappedBy = "compra")
     private List<ComprasProducto> comprasProductos;
     */
