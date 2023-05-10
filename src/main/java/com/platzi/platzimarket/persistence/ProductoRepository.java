@@ -20,6 +20,7 @@ public class ProductoRepository implements ProductRepository {
     private ProductMapper mapper;
 
     // Creamo el metodo para recuperar todos los productos que hay en BD
+    @Override
     public List<Product> getAll() {
         List<Producto> productos = (List<Producto>) productoCrudRepository.findAll(); // inciialmente nos genera error)
         return mapper.toProcusts(productos);
@@ -28,48 +29,39 @@ public class ProductoRepository implements ProductRepository {
 
     @Override
     public Optional<List<Product>> getByCategory(int categoryId) {
-        return Optional.empty();
+        List<Producto> productos = productoCrudRepository.findByIdCategoriaOrderByNombreAsc(categoryId);
+        return Optional.of(mapper.toProcusts(productos));
     }
 
     @Override
     public Optional<List<Product>> getScarseProducts(int quantity) {
-        return Optional.empty();
+        Optional<List<Producto>> productos =  productoCrudRepository.findByCantidadStockLessThanAndEstado(quantity, true);
+        // como no tengo ningun mapiador que me convierta una lista de opcionales
+        // por lo tango tengo que crear un map de los productos
+        return productos.map(prods -> mapper.toProcusts(prods)); // De esta forma el .map me genera un opcional de lo que este haciendo dentro de mi exprecion
+        // lo que hace es que me convierte (toda la lista de productos que cumplen con la condicion ) a Product
     }
 
     @Override
     public Optional<Product> getProduct(int productId) {
-        return Optional.empty();
+    return productoCrudRepository.findById(productId).map(producto -> mapper.toProduct(producto));
+
     }
 
     @Override
     public Product save(Product product) {
-        return null;
+        // el save espera un producto no un product
+        // por lo que hacemos la conversion inversa
+        Producto producto = mapper.toProducto(product);
+        return mapper.toProduct(productoCrudRepository.save(producto));
     }
 
-    //productos por categoria
-    public List<Producto> getByCategoria(int idCategoria) {
-        return productoCrudRepository.findByIdCategoriaOrderByNombreAsc(idCategoria);
-    }
-
-    //productos por cantidad y estado  (para identificar los productos escasos)
-    public Optional<List<Producto>> getEscasos(int cantidad) {
-        return productoCrudRepository.findByCantidadStockLessThanAndEstado(cantidad, true);
-    }
-
-    // para recuperar un produecto en especifico dado su Id
-    public Optional<Producto> getProducto(int idProducto) {
-        return productoCrudRepository.findById(idProducto);
-
-    }
-
-    // guardar un producto
-    public Producto save(Producto producto) {
-        return productoCrudRepository.save(producto);
-    }
 
     // Eliminar un producto mediante su Id
-    public void delete(int idProducto) {
-        productoCrudRepository.deleteById(idProducto);
+    @Override
+    public void delete(int productId) {
+
+        productoCrudRepository.deleteById(productId);
     }
 
 }
