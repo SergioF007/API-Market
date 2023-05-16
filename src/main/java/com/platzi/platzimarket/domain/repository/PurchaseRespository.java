@@ -15,6 +15,8 @@ public interface PurchaseRespository {
     // compras por cliente
     Optional<List<Purchase>> getByClient(String clientId);
 
+    // Optional<List<Purchase>> getByClient2(String clientId);
+
     // guardar compra
     Purchase save(Purchase purchase);
 

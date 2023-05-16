@@ -29,7 +29,7 @@ public class Compra {
     @JoinColumn(name = "id", insertable = false, updatable = false) // añadimos esta configuraciones para que no permita crear clientes desde esta realcion.
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "compra", cascade = {CascadeType.ALL}) // vamos a adicionales que le producto se va a guardar en cascada
     private List<ComprasProducto> productos;
 
 
@@ -95,6 +95,7 @@ public class Compra {
     }
 
     public void setProductos(List<ComprasProducto> productos) {
+
         this.productos = productos;
     }
 }
