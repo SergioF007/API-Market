@@ -9,7 +9,7 @@ public class Purchase {
     private String clientId;
 
     private LocalDate date;
-    private String pymenteMethod;
+    private String paymentMethod;
 
     private String comment;
     private String state;
@@ -39,12 +39,12 @@ public class Purchase {
         this.date = date;
     }
 
-    public String getPymenteMethod() {
-        return pymenteMethod;
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setPymenteMethod(String pymenteMethod) {
-        this.pymenteMethod = pymenteMethod;
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public String getComment() {
