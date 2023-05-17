@@ -1,6 +1,7 @@
 package com.platzi.platzimarket.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Purchase {
@@ -8,7 +9,7 @@ public class Purchase {
     private int purchaseId;
     private String clientId;
 
-    private LocalDate date;
+    private LocalDateTime date;
     private String paymentMethod;
 
     private String comment;
@@ -31,11 +32,11 @@ public class Purchase {
         this.clientId = clientId;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
