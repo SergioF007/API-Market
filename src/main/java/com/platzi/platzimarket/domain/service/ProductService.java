@@ -17,10 +17,12 @@ public class ProductService {
     // Pero la Clase que que lo implementa la cual es ProductoRepository si tiene una notacion
 
     public List<Product> getAll() {
+
         return productRepository.getAll();
     }
 
     public Optional<Product> getProduct(int productId) {
+
         return productRepository.getProduct(productId);
     }
 

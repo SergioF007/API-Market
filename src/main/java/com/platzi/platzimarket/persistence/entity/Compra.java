@@ -26,7 +26,7 @@ public class Compra {
     private String estado;
 
     @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false) // añadimos esta configuraciones para que no permita crear clientes desde esta realcion.
+    @JoinColumn(name = "id_cliente", insertable = false, updatable = false) // añadimos esta configuraciones para que no permita crear clientes desde esta realcion.
     private Cliente cliente;
 
     @OneToMany(mappedBy = "compra", cascade = {CascadeType.ALL}) // vamos a adicionales que le producto se va a guardar en cascada
