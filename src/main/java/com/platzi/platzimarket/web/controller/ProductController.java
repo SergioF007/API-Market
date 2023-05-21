@@ -4,6 +4,10 @@ package com.platzi.platzimarket.web.controller;
 
 import com.platzi.platzimarket.domain.Product;
 import com.platzi.platzimarket.domain.service.ProductService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,19 +26,31 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/all")
+    @ApiOperation("GET all supermarket products")
+    @ApiResponse(code = 200, message = "OK")
     public ResponseEntity<List<Product>>  getAll() {
 
         return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/productId/{Id}")
-    public ResponseEntity<Product> getProduct(@PathVariable("Id") int productId) {
+    @GetMapping("/{Id}")
+    @ApiOperation("Searche a product with a ID")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "Product not found")
+    })
+    public ResponseEntity<Product> getProduct(@ApiParam(value = "The id of the product", required = true, example = "7") @PathVariable("Id") int productId) {
         return productService.getProduct(productId)
                 .map(product -> new ResponseEntity<>(product, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/categoryId/{Id}")
+    @GetMapping("/category/{Id}")
+    @ApiOperation("Searche products by category with a ID")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "Category not found")
+    })
     public ResponseEntity<List<Product>> getByCategory(@PathVariable("Id") int categoryId) {
         return productService.getByCategory(categoryId)
                 .map(products -> new ResponseEntity<>(products, HttpStatus.OK))
@@ -42,12 +58,22 @@ public class ProductController {
     }
 
     @PostMapping("/save")
+    @ApiOperation("Save product")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Product save"),
+            @ApiResponse(code = 404, message = "Product not save")
+    })
     public ResponseEntity<Product> save(@RequestBody Product product){
 
         return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{Id}")
+    @ApiOperation("Delete a products whit a ID")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Product delete"),
+            @ApiResponse(code = 404, message = "Product not delete")
+    })
     public ResponseEntity delete(@PathVariable("Id") int productId) {
         if (productService.delete(productId)) {
             return new ResponseEntity(HttpStatus.OK);
