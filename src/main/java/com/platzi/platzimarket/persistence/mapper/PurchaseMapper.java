@@ -9,7 +9,7 @@ import org.mapstruct.Mappings;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {PurchaseItemsMapper.class}) // por que intermente vamos a mapiar dentro de la compra todos sus productos
+@Mapper(componentModel = "spring", uses = {PurchaseItemsMapper.class}) // por que internamente vamos a mapiar dentro de la compra todos sus productos
 public interface PurchaseMapper {
 
     @Mappings({

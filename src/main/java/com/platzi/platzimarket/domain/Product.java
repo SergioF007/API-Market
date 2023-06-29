@@ -9,7 +9,7 @@ public class Product {
     private int stock;
     private boolean active;
 
-    // no incluyo el atoributo codigoBarras
+    // no incluyo el atributo codigoBarras
 
     private Category category;
 
@@ -68,4 +68,6 @@ public class Product {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+
 }
